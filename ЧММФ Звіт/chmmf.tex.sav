@@ -1,0 +1,269 @@
+\documentclass[a4 paper,12pt,oneside]{article}
+\usepackage[cp1251]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{amsmath}
+%\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage[pdftex]{graphicx}
+%\usepackage{bbm}
+\oddsidemargin 4,54mm   % відстань між лівою межею аркуша і лівою межею тексту на праворуч орієнтованій сторінці
+\evensidemargin 4,54mm  % те саме для ліворуч орієнтованої сторінки
+\topmargin -1cm         % відстань між верхньою межею аркуша і верхнім колонтитулом
+\textwidth 17cm         % ширина тексту, тобто горизонтальний розмір колонтитулів і тіла сторінки
+\textheight 24cm        % висота тексту, тобто вертикальний розмір тіла сторінки (без колонтитулів)
+\headsep 0.5cm          % вертикальна відстань між верхнім колонтитулом і тілом текстової сторінки
+\parindent 10mm         % ширина відступу на початку абзацу
+
+%\renewcommand{\baselinestretch}{1.2}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{title}{}
+
+\large
+{
+\centerline{Міністерство освіти і науки України}
+\centerline{Львівський національний університет імені Івана Франка}
+\centerline{Факультет прикладної математики та інформатики}
+\centerline{Кафедра обчислювальної математики}
+}
+\vspace{5cm}
+
+ \centerline{\Large{{Андріюк Дмитро Володимирович}}}
+
+\begin{center}
+\Large{\textbf{Звіт}}
+
+\Large{{на тему:}}
+\end{center}
+
+\begin{Large}
+{
+\centerline{\bf "Метод Рітца розв'язування диференціальних задач" }
+ }
+ \end{Large}
+ \normalsize
+
+\vspace*{1.0cm}
+
+\normalsize
+\vspace*{3.6cm}
+\large
+{
+\vspace*{1.0cm}
+\vspace*{5.0cm}
+\centerline{Львів-2014}
+}
+\end{title}
+\begin{center}
+\tableofcontents
+\end{center}
+\newpage
+
+%\begin{center}
+%\addcontentsline{toc}{section}{Вступ}
+%\section*{Вступ}
+%\end{center}
+%\hspace*{\parindent}
+%{
+%}
+%\newpage
+\section{Постановка задачі}
+
+Знайти наближений розв'язок крайової диференціальної задачі
+\begin{equation}
+\label{DyfEq}
+\begin{cases}
+%\displaystyle -\frac{d}{dx}\biggl( \Bigl(\frac{1}{1+x^2}\Bigr)
+%\frac{du(x)}{dx} \biggr)+u(x) = \frac{\((x^4+3x^2+2)\sin(x)+2x\cos(x)\)}{(1+x^2)^2}
+\\
+u(0) = 0, \ \ u'(\frac{\pi}{2})=0,
+\end{cases}
+\end{equation}
+використовуючи метод Рітца для знаходження мінімуму відповідного функціоналу енергії.
+Диференціальна задача (\ref{DyfEq}) в операторному вигляді має такий вигляд:
+\begin{equation*}
+Au = f,
+\end{equation*}
+де $f$ - права частина диференціального рівняння.
+Область визначення $D_A$ оператора А так:
+\begin{equation}
+\label{DomainOper}
+D_A = \left\{u(x):\ u(x) \in W_{2}^{(2)}[0,\frac{\pi}{2}],\ u(0)=0,\ u'(\frac{\pi}{2})=0 \right\}.
+\end{equation}
+Отже, оператор $А$ крайової задачі (\ref{DyfEq}) характеризований диференціальним рівнянням в (\ref{DyfEq}) та областю визначення (\ref{DomainOper}).
+
+\section{Додатні та додатно визначені оператори}
+{
+Розглядатимемо задачі вигляду
+$$
+Au = f
+$$
+де $A$ - лінійний оператор, що відображає деяку множину $D_A$(область визначення оператора $A$), яка належить гільбертовому простору $H$, на множину $R_A \subset H$(область значень оператора $H$).
+
+\newtheorem{Symetric}{Означення}[section]
+\begin{Symetric}
+\label{SymOperator}
+Оператор $A$ називають симетричним, якщо його область визначення $D_A \subset H$ є щільною множиною у просторі $H$, і виконується співвідношення
+\begin{equation}
+\label{SymEq}
+(Au,v) = (u,Av), \quad \forall \ u,v \in D_A.
+\end{equation}
+\end{Symetric}
+
+\newtheorem{DodVyzn}[Symetric]{Означення}
+\begin{DodVyzn}
+\label{DodOperator}
+Оператор $A$ називають додатним, якщо він симетричний, і виконуються співвідношення
+\begin{equation}
+  \label{DodEq}
+  (Au,u) \geq 0, \quad \forall \ u \in D_A;
+\end{equation}
+\begin{equation}
+  \label{DodNevyrEq}
+  (Au,u) = 0\  \Rightarrow \ u\equiv 0.
+\end{equation}
+Якщо в цьому разі існує стала $\gamma >0$ така, що виконується нерівність
+\begin{equation}
+  \label{DodVEq}
+  (Au,u) \geq \gamma^{2}{||u||}_H^2,
+\end{equation}
+то оператор $A$ називають додатно визначеним.
+\end{DodVyzn}
+}
+
+\section{Дослідження операторного рівняння}
+
+Для застосування методу Рітца потрібно дослідити відповідний оператор $A$ диференціальної задачі (\ref{DyfEq}) на додатну визначеність.
+Оператор $А$ має такий вигляд:
+\begin{equation*}
+Au = -(pu')'+ru,
+\end{equation*}
+де $p=p(x),\  r=r(x);\  p'=p'(x)$ - неперервні на $[0,\frac{\pi}{2}]$.
+В даному випадку $$p(x) = \frac{1}{1+x^2},\ \ \  r(x)=1,\ \ \   f=\frac{\((x^4+3x^2+2)sin(x)+2xcosx}{({1+x^2})^2}$$
+Зауважимо, що $p(x)\geq p_0 > 0;\  r(x)\geq 0$ на $[0,\frac{\pi}{2}]$. За $p_0$ тут можна обрати таку величину $p_0 = \frac{1}{1+\pi^2}.$
+Дослідимо оператор на симетричність:
+$$(Au,v) = -\int\limits_{0}^{\pi}(pu')'vdx + \int\limits_{0}^{\pi}ruvdx,\quad \forall\  u,v \in D_A;$$
+$$(Au,v) = \int\limits_{0}^{\pi}pu'v'dx + \int\limits_{0}^{\pi}ruvdx - vpu'{\Bigl|}_{0}^{\pi};$$
+Оскільки, $ r(x)\equiv 1;\  u,v \in D_A $, то використовуючи крайові умови з (\ref{DomainOper}), отримаємо
+$$(Au,v) = \int\limits_{0}^{\pi}pu'v'dx + \int\limits_{0}^{\pi}uvdx = (u,Av).$$
+Симетричність показано.
+Дослідимо оператор на додатність. Спочатку перевіримо умову (\ref{DodEq}).
+\begin{equation}
+\label{DodP0}
+(Au,u) = \int\limits_{0}^{\pi}p{u'}^{2}dx + \int\limits_{0}^{\pi}u^2dx \geq p_0\int\limits_{0}^{\pi}{u'}^{2}dx \geq 0.
+\end{equation}
+Тепер перевіримо умову (\ref{DodNevyrEq}).
+$$0=(Au,u) = \int\limits_{0}^{\pi}p{u'}^{2}dx + \int\limits_{0}^{\pi}u^2dx \Rightarrow u'\equiv\  const\  \textnormal{на}\  [0,\pi]. $$
+Враховуючи те, що $u(0)=0$, то $u \equiv 0$ на $[0,\frac{\pi}{2}].$
+Тепер покажемо додатну визначеність оператора А.
+В силу першої з крайових  умов можна записати:
+$$ u(x) = \int\limits_{0}^{x}\frac{du}{dt}dt.$$
+Звідси, враховуючи нерівність Коші-Буняковського, отримаємо
+$$ u^2(x) = {\biggl( \int\limits_{0}^{x}\frac{du}{dt}dt \biggr)}^2 \leq \int\limits_{0}^{x}{\Bigl(\frac{du}{dt}\Bigr)}^2dt \int\limits_{0}^{x}dt \leq x\int\limits_{0}^{\frac{\pi}{2}}{\Bigl(\frac{du}{dt}\Bigr)}^2dt$$
+Зінтегрувавши ліву та праву частини останньої нерівності на відрізку $[0,\pi]$ знайдемо
+\begin{equation}
+\label{NormUKv}
+{\|u\|}^2 = \int\limits_{0}^{\frac{\pi}{2}}u^2dx \leq \frac{(\frac{\pi}{2}-0)^2}{2}\int\limits_{0}^{\frac{\pi}{2}}{\Bigl(\frac{du}{dx}\Bigr)}^2dx = \frac{{\frac{\pi}{2}}^2}{2}\int\limits_{0}^{\frac{\pi}{2}}{u'}^2dx
+\end{equation}
+З (\ref{DodP0}) і (\ref{NormUKv}) випливає, що
+$$(Au,u) \geq \gamma^{2}{\|u\|}^2,\  \textnormal{де}\  \gamma = \frac{\sqrt{2}}{\pi\sqrt{1+\pi^2}}.$$
+
+
+
+
+\section{Метод Рітца}
+{
+Для побудови наближеного розв'язку задачі про мінімум квадратичного функціонала можна скористатися методом Рітца.
+
+Нехай $A$ - додатно визначений оператор. Тоді крайова задача $Au = f$ еквівалентна (згідно з теоремою про функціонал енергії) задачі мінімізації такого функціонала:
+\begin{equation}
+\label{FuncEnergy}
+F(u) = {(u,u)}_A - 2(u,f),\quad u \in H_A.
+\end{equation}
+Скалярний добуток $(u,v)_A$ введений таким чином:
+\begin{equation}
+\label{ScalEnergy}
+(u,v)_A = (Au,v).
+\end{equation}
+$H_A$ -- гільбертів простір, визначений на множині $D_A$. Якщо цей простір не є повним, то доповнюємо його граничними (у сенсі метрики, породженої скалярним добутком (\ref{ScalEnergy})) елементами $\Gamma_A$.
+
+Вибираємо послідовність функцій $\{\varphi\}_n$, кожна з яких задовольняє такі вимоги:
+\begin{enumerate}
+%\renewcommand{\theenumi}{\Roman{enumi}}
+\item $\varphi_n \in H_A,$
+\item $det\ G \neq 0, \quad G=\{(\varphi_i,\varphi_j)_A\}$
+\item $\forall u_0 \in H_A,\  \forall\ \varepsilon >0\ \ \ \ \ \exists n,\ \alpha_i: {\Bigl|\Bigr| u_0 - \sum\limits_{i=1}^{n}\alpha_i \varphi_i \Bigl|\Bigr|}_A \leq \varepsilon$
+\end{enumerate}
+Тут $G$ -- матриця Грамма послідовності функцій $\{\varphi_n\}$.
+Наближений розв'язок шукаємо в такому вигляді:
+\begin{equation*}
+\label{SolSum}
+u_n = \sum_{i=1}^{n}\alpha_i \varphi_i,
+\end{equation*}
+де $\alpha_i$ - невідомі коефіцієнти, які знаходимо з такої системи алгебричних рівнянь
+\begin{equation*}
+\sum_{j=1}^{n}\alpha_i(\varphi_i,\varphi_j)_A = (\varphi_i,f), \qquad i=1,\ldots,n.
+\end{equation*}
+}
+
+\section{Числові експерименти}
+
+Для запису одновимірних кусково-лінійних базисних функцій розділимо проміжок $[a, b]$ на відрізки — скінченні елементи, точками $x_i, і = 0,1,...,n, x_0 = a, x_n = b$. Задамо базисну функцію $\varphi_i^h(x)$ співвідношенням
+$$
+\varphi_i^h =
+	\left\{
+	\begin{array}{l l}
+		0, \; x_0 < x < x_{i-1} ;\\
+		\frac{x-x_{i-1}}{h_{i-}} ,\; x_{i-1}\leq x < x_i;\\
+		-\frac{x-x_{i+1}}{h_{i+1}} ,\; x_i \leq x < x_{i+1};\\
+		0, \; x_{i+1} \leq x < x_n,
+	\end{array}
+	\right. ,
+	$$
+де $h_i := x_i - x_{i-1}$.
+\subsection{Приклад 1}
+
+Розіб'ємо відрізок $[0,\frac{\pi}{2}]$ на $n$ відрізків. Нехай $n = 5$, точний і наближений розв'язки задачі (\ref{DyfEq}) подано на рис.1.
+ \begin{center}
+\includegraphics[scale=0.6]{1.jpg}
+\end{center}
+
+\newpage
+\subsection{Приклад 2}
+{
+Нехай $n = 10$, точний і наближений розв'язки задачі (\ref{DyfEq}) подано на рис.1.
+ \begin{center}
+\includegraphics[scale=0.6]{2.JPG}
+\end{center}
+}
+\newpage
+\subsection{Приклад 3}
+{
+Нехай $n = 30$, точний і наближений розв'язки задачі (\ref{DyfEq}) подано на рис.1.
+ \begin{center}
+\includegraphics[scale=0.6]{3.JPG}
+\end{center}
+}
+\newpage
+\section{Висновок}
+{
+В даній роботі ми знайшли наближений розв'язок крайової диференціальної задачі, звівши її до операторного вигляду. Перед тим як застосовувати метод Рітца, ми дослідили наше операторне рівняння на додатно визначеність, при цьому довели його симетричність. Застосували метод Рітца для знаходження мінімуму відповідного функціоналу енергії, знайшли наближений розв'язок крайової задачі.
+}
+\newpage
+
+
+\begin{center}
+\addcontentsline{toc}{section}{Список літератури}
+\end{center}
+\begin{thebibliography}{99}
+
+\bibitem{Savula}\emph{Савула Я.Г.} Числовий аналіз задач математичної фізики варіаційними методами. - Львів: видавничий центр ЛНУ імені Івана Франка, 2004. -- 221 с.
+\bibitem{Author}\emph{Ректорис К.} Вариационные методы в математической физике и технике: Пер. с англ. -- М.: Мир, 1985.--590 с.
+
+%\bibitem{Author}\emph{Троелсен Ендрю} Язык программирования С\# 2005 и платформа .NET 2.0, 3-е издание. : Пер. с англ. - М.: ООО "И.Д.Вильямс", 2007.- 1168 с.
+%\bibitem{Author}\emph{Шилдт Герберт} Полный справочник по С\#. : Пер. с англ. — М. : Издательский дом "Вильямc", 2004.- 752 с.
+%\bibitem{Moch}\emph{Мочурад Л.І., Остудін Б.А.} Деякі аспекти наближеного розв'язування задач електростатики із врахуванням специфіки вхідної інформації. // Львівський національний університет імені Івана Франка.
+\end{thebibliography}
+
+\end{document} 

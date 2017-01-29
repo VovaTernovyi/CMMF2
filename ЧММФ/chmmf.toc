@@ -1,0 +1,6 @@
+\select@language {ukrainian}
+\contentsline {section}{\numberline {1}\IeC {\CYRP }\IeC {\cyro }\IeC {\cyrs }\IeC {\cyrt }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyrk }\IeC {\cyra } \IeC {\cyrz }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyrii }}{3}
+\contentsline {section}{\numberline {2}\IeC {\CYRM }\IeC {\cyre }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrd }}{3}
+\contentsline {section}{\numberline {3}\IeC {\CYRCH }\IeC {\cyri }\IeC {\cyrs }\IeC {\cyrl }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyrii } \IeC {\cyre }\IeC {\cyrk }\IeC {\cyrs }\IeC {\cyrp }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyrt }\IeC {\cyri }}{5}
+\contentsline {subsection}{\numberline {3.1}\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrk }\IeC {\cyrl }\IeC {\cyra }\IeC {\cyrd }}{5}
+\contentsline {section}{\IeC {\CYRS }\IeC {\cyrp }\IeC {\cyri }\IeC {\cyrs }\IeC {\cyro }\IeC {\cyrk } \IeC {\cyrl }\IeC {\cyrii }\IeC {\cyrt }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrt }\IeC {\cyru }\IeC {\cyrr }\IeC {\cyri }}{7}

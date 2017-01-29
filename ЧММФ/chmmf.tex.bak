@@ -1,0 +1,273 @@
+\documentclass[a4 paper,12pt,oneside]{article}
+\usepackage[cp1251]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{amsmath}
+%\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage[pdftex]{graphicx}
+%\usepackage{bbm}
+\oddsidemargin 4,54mm   % відстань між лівою межею аркуша і лівою межею тексту на праворуч орієнтованій сторінці
+\evensidemargin 4,54mm  % те саме для ліворуч орієнтованої сторінки
+\topmargin -1cm         % відстань між верхньою межею аркуша і верхнім колонтитулом
+\textwidth 17cm         % ширина тексту, тобто горизонтальний розмір колонтитулів і тіла сторінки
+\textheight 24cm        % висота тексту, тобто вертикальний розмір тіла сторінки (без колонтитулів)
+\headsep 0.5cm          % вертикальна відстань між верхнім колонтитулом і тілом текстової сторінки
+\parindent 10mm         % ширина відступу на початку абзацу
+
+%\renewcommand{\baselinestretch}{1.2}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{title}{}
+
+\large
+{
+\centerline{Міністерство освіти і науки України}
+\centerline{Львівський національний університет імені Івана Франка}
+\centerline{Факультет прикладної математики та інформатики}
+\centerline{Кафедра обчислювальної математики}
+}
+\vspace{5cm}
+
+ \centerline{\Large{{Тернового Володимира Михайловича}}}
+
+\begin{center}
+\Large{\textbf{Звіт}}
+
+\Large{{на тему:}}
+\end{center}
+
+\begin{Large}
+{
+\centerline{\bf "Крайова задача для системи диференціальних рівнянь"}
+ }
+ \end{Large}
+ \normalsize
+
+\vspace*{1.0cm}
+
+\normalsize
+\vspace*{3.6cm}
+\large
+{
+\vspace*{1.0cm}
+\vspace*{5.0cm}
+\centerline{Львів-2016}
+}
+\end{title}
+\begin{center}
+\tableofcontents
+\end{center}
+\newpage
+
+%\begin{center}
+%\addcontentsline{toc}{section}{Вступ}
+%\section*{Вступ}
+%\end{center}
+%\hspace*{\parindent}
+%{
+%}
+%\newpage
+\section{Постановка задачі}
+
+Розглянемо крайову задачу, яку описує система диференціальних рівнянь
+\begin{equation}
+\label{eq:3.26}
+    -\sum\limits_{k=1}^s \left[\frac{d}{dx} \left(p_{jk}(x) \frac{du_k}{dx} \right) - q_{jk}(x)u_k \right] = f_j(x); \quad x \in (a,b);
+\end{equation}
+\begin{equation}
+\label{eq:3.27}
+    u_k(a) = u_k(b) = 0; \quad k,j = 1,2, \dots ,s
+\end{equation}
+
+Уведемо позначення для матриць стовпців невідомих і правих частин та матриць коефіцієнтів
+\begin{equation*}
+\begin{split}
+    u & = \{u_j\}; \quad f = {f_j(x)};\\
+    P & = \{p_{jk}(x)\}; \quad Q = \{q_{jk}(x)\};
+\end{split}
+\end{equation*}
+
+Урахувавши їх задачу \eqref{eq:3.26}, \eqref{eq:3.27} можна записати у такому вигляді:
+\begin{equation}
+\begin{split}
+    \frac{d}{dx}P(x)\frac{du}{dx} + & Q(x)u = f(x); \; x \in (a,b); \; f(x) \in L_2(a,b)\\
+    & u(a) = 0; \; u(b) = 0;
+\end{split}
+\end{equation}
+
+Оскільки оператор задачі \eqref{eq:3.26}, \eqref{eq:3.27} додатно визначений, то її можна записати у таких варіаційних формулюваннях:
+\begin{equation}
+\label{eq:3.31}
+    F(u) \to \min , \; u \in U;
+\end{equation}
+\begin{equation*}
+    F(u) = \sum\limits_{j,k=1}^s \int\limits_{a}^{b} p_{jk}(x)u'_ju'_kdx + \sum\limits_{j,k=1}^s q_{jk}(x)u_ju_kdx \ge \lambda \sum\limits_{k=1}^s \int\limits_{a}^{b} {u'_k}^2dx
+\end{equation*}
+\begin{equation*}
+    U = \left\{u=\{u_1, \dots ,u_s\}^T; \; u_k \in W^{(1)}_2(a,b), \; u_k(a) = u_k(b) = 0, \; k = 1,s \right\};
+\end{equation*}
+\begin{equation}
+\label{eq:3.32}
+    (Au,v) = (f,v), \quad \forall v \in U, u \in U.
+\end{equation}
+
+Варіаційні формулювання \eqref{eq:3.31}, \eqref{eq:3.32} є еквівалентними.
+
+\section{Метод}
+Для побудови наближеного розв'язку варіаційної задачі задамо поділ області
+\begin{equation}
+    a=x_0<x_1<,\dots ,<x_{n-1}<x_{n}=b.
+\end{equation}
+
+Розпишемо наші формули
+\begin{equation}
+    u_h=N_i(x)q_i;
+\end{equation}
+\begin{equation}
+    N_i =
+        \begin{pmatrix}
+            \begin{matrix}
+                \varphi^{h}_{i-1} & 0 & \varphi^{h}_{i} & 0 \\
+                0 & \varphi^{h}_{i-1} & 0 & \varphi^{h}_{i} \\
+            \end{matrix}
+        \end{pmatrix};
+\end{equation}
+\begin{equation}
+    q_i = \left\{u^{h}_{1,i-1}, u^{h}_{2,i-1}, u^{h}_{1,i}, u^{h}_{2,i} \right\}^T;
+\end{equation}
+\begin{equation}
+    A_i = K_i + M_i;
+\end{equation}
+\begin{equation}
+    K_i = \int\limits_{x_{i-1}}^{x_i}
+        \begin{pmatrix}
+            \begin{matrix}
+                \varphi^{'h}_{i-1} & 0 \\
+                0 & \varphi^{'h}_{i-1} \\
+                \varphi^{'h}_{i} & 0 \\
+                0 & \varphi^{'h}_{i} \\
+            \end{matrix}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \begin{matrix}
+                p_{11} & p_{12} \\
+                p_{12} & p_{22} \\
+            \end{matrix}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \begin{matrix}
+                \varphi^{h}_{i-1} & 0 & \varphi^{h}_{i} & 0 \\
+                0 & \varphi^{h}_{i-1} & 0 & \varphi^{h}_{i} \\
+            \end{matrix}
+        \end{pmatrix}dx
+\end{equation}
+\begin{equation}
+    K_i = \int\limits_{x_{i-1}}^{x_i}
+        \begin{pmatrix}
+            \begin{matrix}
+                (\varphi^{'h}_{i-1})^2p_{11} & (\varphi^{'h}_{i-1})^2p_{12} & \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{11} & \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{12} \\
+                (\varphi^{'h}_{i-1})^2p_{12} & (\varphi^{'h}_{i-1})^2p_{22} & \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{12} & \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{22} \\
+                \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{11} & \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{12} & (\varphi^{'h}_{i})^2p_{11} & (\varphi^{'h}_{i})^2p_{12} \\
+                \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{12} & \varphi^{'h}_{i-1}\varphi^{'h}_{i}p_{22} & (\varphi^{'h}_{i})^2p_{12} & (\varphi^{'h}_{i})^2p_{22} \\
+            \end{matrix}
+        \end{pmatrix}
+\end{equation}
+\begin{equation}
+    M_i = \int\limits_{x_{i-1}}^{x_i}
+        \begin{pmatrix}
+            \begin{matrix}
+                (\varphi^{h}_{i-1})^2q_{11} & (\varphi^{h}_{i-1})^2q_{12} & \varphi^{h}_{i-1}\varphi^{h}_{i}q_{11} & \varphi^{h}_{i-1}\varphi^{h}_{i}q_{12} \\
+                (\varphi^{h}_{i-1})^2q_{12} & (\varphi^{h}_{i-1})^2q_{22} & \varphi^{h}_{i-1}\varphi^{h}_{i}q_{12} & \varphi^{h}_{i-1}\varphi^{h}_{i}q_{22} \\
+                \varphi^{h}_{i-1}\varphi^{h}_{i}q_{11} & \varphi^{h}_{i-1}\varphi^{h}_{i}q_{12} & (\varphi^{h}_{i})^2q_{11} & (\varphi^{h}_{i})^2q_{12} \\
+                \varphi^{h}_{i-1}\varphi^{h}_{i}q_{12} & \varphi^{h}_{i-1}\varphi^{h}_{i}q_{22} & (\varphi^{h}_{i})^2q_{12} & (\varphi^{h}_{i})^2q_{22} \\
+            \end{matrix}
+        \end{pmatrix}
+\end{equation}
+\begin{equation}
+    B_i = \int\limits_{x_{i-1}}^{x_i} N^T_i(x)f(x)dx = 
+        \begin{pmatrix}
+            \begin{matrix}
+                \varphi^{h}_{i-1} & 0 \\
+                0 & \varphi^{h}_{i-1} \\
+                \varphi^{h}_{i} & 0 \\
+                0 & \varphi^{h}_{i} \\
+            \end{matrix}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \begin{matrix}
+                f_1 \\
+                f_2 \\
+            \end{matrix}
+        \end{pmatrix} dx = 
+        \int\limits_{x_{i-1}}^{x_i}
+        \begin{pmatrix}
+            \begin{matrix}
+                \varphi^{h}_{i-1}, f_1 \\
+                \varphi^{h}_{i-1}, f_2 \\
+                \varphi^{h}_{i}, f_1 \\
+                \varphi^{h}_{i}, f_2 \\
+            \end{matrix}
+        \end{pmatrix} dx.
+\end{equation}
+\begin{equation}
+1
+\end{equation}
+\begin{equation}
+1
+\end{equation}
+
+\section{Числові експерименти}
+
+Для запису одновимірних кусково-лінійних базисних функцій розділимо проміжок $[a, b]$ на відрізки — скінченні елементи, точками $x_i, і = 0,1,...,n, x_0 = a, x_n = b$. Задамо базисну функцію $\varphi_i^h(x)$ співвідношенням
+$$
+\varphi_i^h =
+	\left\{
+	\begin{array}{l l}
+		0, \; x_0 < x < x_{i-1} ;\\
+		\frac{x-x_{i-1}}{h_{i-}} ,\; x_{i-1}\leq x < x_i;\\
+		-\frac{x-x_{i+1}}{h_{i+1}} ,\; x_i \leq x < x_{i+1};\\
+		0, \; x_{i+1} \leq x < x_n,
+	\end{array}
+	\right. ,
+	$$
+де $h_i := x_i - x_{i-1}$.
+\subsection{Приклад 1}
+
+Розіб'ємо відрізок $[0,2\pi]$ на $n$ відрізків. Нехай $n = 10$, точний і наближений розв'язки задачі (\ref{DyfEq}) подано на рисунку.
+\\
+\begin{center}
+\includegraphics[scale=0.6]{1.png}
+\end{center}
+
+\newpage
+\subsection{Приклад 2}
+{
+Нехай $n = 25$, точний і наближений розв'язки задачі (\ref{DyfEq}) подано на рисунку.
+\\
+\begin{center}
+\includegraphics[scale=0.6]{2.png}
+\end{center}
+}
+\newpage
+\section{Висновок}
+{
+В даній роботі ми знайшли наближений розв'язок крайової диференціальної задачі, звівши її до операторного вигляду. Перед тим як застосовувати метод Рітца, ми дослідили наше операторне рівняння на додатно визначеність, при цьому довели його симетричність. Застосували метод Рітца для знаходження мінімуму відповідного функціоналу енергії.
+}
+\newpage
+
+
+\begin{center}
+\addcontentsline{toc}{section}{Список літератури}
+\end{center}
+\begin{thebibliography}{99}
+
+\bibitem{Savula}\emph{Савула Я.Г.} Числовий аналіз задач математичної фізики варіаційними методами. - Львів: видавничий центр ЛНУ імені Івана Франка, 2004. -- 221 с.
+\bibitem{Author}\emph{Ректорис К.} Вариационные методы в математической физике и технике: Пер. с англ. -- М.: Мир, 1985.--590 с.
+
+%\bibitem{Author}\emph{Троелсен Ендрю} Язык программирования С\# 2005 и платформа .NET 2.0, 3-е издание. : Пер. с англ. - М.: ООО "И.Д.Вильямс", 2007.- 1168 с.
+%\bibitem{Author}\emph{Шилдт Герберт} Полный справочник по С\#. : Пер. с англ. — М. : Издательский дом "Вильямc", 2004.- 752 с.
+%\bibitem{Moch}\emph{Мочурад Л.І., Остудін Б.А.} Деякі аспекти наближеного розв'язування задач електростатики із врахуванням специфіки вхідної інформації. // Львівський національний університет імені Івана Франка.
+\end{thebibliography}
+
+\end{document} 
